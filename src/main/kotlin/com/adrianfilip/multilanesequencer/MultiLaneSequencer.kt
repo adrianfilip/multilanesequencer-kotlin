@@ -88,7 +88,7 @@ open class MultiLaneSequencerImpl(providedRequestResponseEventBus: Option<Emitte
         val pending: MutableList<WrappedMessage> = mutableListOf()
 
         requestResponseEventBus
-            .publishOn(Schedulers.newSingle("Single"))
+            .publishOn(Schedulers.newSingle("MultiLaneSequencerImpl ${UUID.randomUUID()}"))
             .doOnNext { message ->
                 println("THREAD ===" + Thread.currentThread().name)
                 when (message) {
