@@ -47,9 +47,7 @@ open class MultiLaneSequencerImpl(providedRequestResponseEventBus: Option<Emitte
     override fun <T> sequence(lanes: Set<Lanes.Lane>, program: IO<T>): IO<CompletableFuture<T>> = IO {
         val key = UUID.randomUUID().toString()
 
-        /**
-         * Here I subscribe for the answer to the request.
-         */
+        // Here I subscribe for the answer to the request.
         val f = requestResponseEventBus
             .publishOn(Schedulers.elastic())
             .filter { it is Message.ResponseMessage }
@@ -90,7 +88,6 @@ open class MultiLaneSequencerImpl(providedRequestResponseEventBus: Option<Emitte
         requestResponseEventBus
             .publishOn(Schedulers.newSingle("MultiLaneSequencerImpl ${UUID.randomUUID()}"))
             .doOnNext { message ->
-                println("THREAD ===" + Thread.currentThread().name)
                 when (message) {
                     is Message.RequestMessage -> {
 
