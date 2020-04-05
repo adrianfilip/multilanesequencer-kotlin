@@ -45,7 +45,7 @@ open class MultiLaneSequencerImpl(providedRequestResponseEventBus: Option<Emitte
 
 
     override fun <T> sequence(lanes: Set<Lanes.Lane>, program: IO<T>): IO<CompletableFuture<T>> = IO {
-        val key = UUID.randomUUID().toString() + UUID.randomUUID().toString() + UUID.randomUUID().toString()
+        val key = UUID.randomUUID().toString()
 
         /**
          * Here I subscribe for the answer to the request.
